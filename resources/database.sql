@@ -19,3 +19,5 @@ CREATE TABLE Pages (
 	PRIMARY KEY (ID),
 	FOREIGN KEY (User_ID) REFERENCES (Users) ON DELETE CASCADE
 );
+
+INSERT INTO Users (nickname) VALUES 'carry';
