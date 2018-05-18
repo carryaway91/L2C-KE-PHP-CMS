@@ -23,6 +23,7 @@ CREATE TABLE Pages (
 INSERT INTO Users (nickname) VALUES ('carry');
 INSERT INTO Pages (title, content, User_ID, menu_label, menu_order) VALUES ('Welcome',
 'lorem_ipsum', 1, 'welcome', 0);
-INSERT INTO Pages (title, content, User_ID, menu_label, menu_order) VALUES ('Welcome',
-'lorem_ipsum', 1, 'welcome', 0);
+INSERT INTO Pages (title, content, User_ID, menu_label
 
+, menu_order) VALUES ('Welcome',
+'lorem_ipsum', 1, 'welcome', 0);
