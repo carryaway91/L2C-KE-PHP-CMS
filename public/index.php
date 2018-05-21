@@ -48,7 +48,7 @@ require_once dirname(__FILE__).'/../framework/helpers.php';
         <div class="col-sm-8 blog-main">
         
         
-        <?php  foreach(db_select("SELECT * FROM pages") as $page) { ?>
+        <?php foreach(db_select("SELECT * FROM pages") as $page) { ?>
           <div class="blog-post">  
             <h2 class="blog-post-title"> <?php echo $page->title ?></h2>
            
@@ -57,7 +57,7 @@ require_once dirname(__FILE__).'/../framework/helpers.php';
            
             <?php 
                 $users = db_select("SELECT * FROM Users WHERE id=".$page->User_ID);
-                $user_name = $users[0]->nickname; //ak vytahujeme z pola users hodnotu na indexe, stava sa objektom a tym padm sa nanho mozme odkazovat sipkou a jeho atributy 
+                $user_name = $users[0]->nickname; //ak vytahujeme z pola users hodnotu na indexe, stava sa objektom a tym padom sa nanho mozme odkazovat sipkou a jeho atributy 
                 $user_email = $users[0]->email;
             ?>
           

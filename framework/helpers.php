@@ -22,9 +22,17 @@
 			$data[] = $object;
  			//array_push($data, $object);
 		}
-		var_dump($data);
 		return $data;
 	 }
+	 
+    /*funkcia vrat jeden vysledok z databazy */
+	 function db_single($sql_string) {
+		 $result = db_query($sql_string);
+
+		 return mysqli_fetch_object($result);
+	 }
+
+
 	 
 	 //******pomocne funkcie na komunikaciu s databazou (mysql) */
  ?>
