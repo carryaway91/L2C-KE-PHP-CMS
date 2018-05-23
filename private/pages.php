@@ -1,12 +1,33 @@
+<?php require_once dirname(__FILE__).'/../framework/helpers.php';
+	
+	if(!empty($_POST)) {
+		if(!empty($_POST['action'])) {
+			switch($_POST['action']) {		
+				case 'insert': 
+					if(!empty($_POST['title']) && $_POST['content'] && $_POST['user_id']) {
+						db_query("INSERT INTO pages (title, content, user_id) VALUES ('".$_POST['title']."','".$_POST['content']."','".$_POST['user_id']."')");
+					}
+				break;
+				case 'update':
+					if(!empty($_POST['id'])) {
+						if (!empty($_POST['title']) && !empty($_POST['content']) ) {
+							db_query("UPDATE pages SET title='".$_POST['title']."', content='".$_POST['content']."' WHERE ID=".$_POST['id']);
+						}
+					}
+				break;
+				case 'delete': if(!empty($_POST['id'])) {
+						db_query("DELETE FROM pages WHERE ID='".$_POST['id']."'");
+				}
+				break;
+			}
+		}
+	}
+	$pages = db_select('SELECT * FROM pages');
+//pripajame subor s funkciami na vytahovanie dat
+//vytiahneme data z databazy do $pages => vznikne nam pole ($data)
+    ?>
 
 <!DOCTYPE html>
-
-<?php require_once dirname(__FILE__).'/../framework/helpers.php';
-    $pages = db_select('SELECT * FROM pages');
-//pripajame subor s funkciami na vytahovanie dat
-//vytiahneme data z databazy do $pages => vznikne nam pole
-
-    ?>
 
     <html lang="en">
 
@@ -42,8 +63,8 @@
 
 				<div class="col-sm-12 col-md-12 main">
 
-					<h1 class="page-header">Users</h1>
-
+					<h1 class="page-header">Pages</h1>
+					<a href="page.php">Add new page</a>
 					<div class="table-responsive">
 
 						<table class="table table-striped">
@@ -55,7 +76,7 @@
 									<th>ID</th>
 									<th>title</th>
 									<th>content</th>
-                                    <th>User_ID</th>
+                                    <th>email</th>
                                     <th>menu_label</th>
                                     <th>menu_order</th>
 								</tr>
@@ -64,22 +85,19 @@
 
 							<tbody>
 
-								<!-- add PHP here -->
-                    
+								<!-- add PHP here -->                   
                                 <?php foreach($pages as $page) {
                                     //prechadzame cez pole a vytahujeme cez $page objekt atributy v tabulke
                                         echo '<tr>';
                                         echo '<td>'.$page->ID.'</td>';
                                         echo '<td>'.$page->title.'</td>';
                                         echo '<td>'.$page->content.'</td>';
-                                        echo '<td>'.$page->User_ID.'</td>';
+                                        echo '<td>'.db_single("SELECT * FROM users WHERE ID=".$page->User_ID)->email.'</td>';
                                         echo '<td>'.$page->menu_label.'</td>';
                                         echo '<td>'.$page->menu_order.'</td>';
                                         echo '</tr>';
                                 }
                                 ?>
-								
-
 								<!-- add PHP here -->
 
 							</tbody>
