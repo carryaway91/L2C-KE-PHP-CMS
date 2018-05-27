@@ -3,9 +3,8 @@
 //tento skript sa vykona po tom, co uzivatel zada prihlasovacie udaje => porovnavaju sa s udajmi v datavaze
 
     include dirname(__FILE__).'/../framework/helpers.php'; //nacitam funkcie na vytahovanie dat z databazy pre porovnavanie uzivatela s udajmi z form
-
     if( !empty($_POST)) { //ak premenna post nie je prazdna tak ... 
-        if(  isset($_POST['email']) && isset($_POST['password']) ) { //ak sme zadali do inputu nas email a heslo
+        if(  !empty($_POST['email']) && !empty($_POST['password']) ) { //ak sme zadali do inputu nas email a heslo
            
             $user = db_single("SELECT * FROM users WHERE email = '".$_POST['email']."'"); 
             /*do premennej user vytiahneme Z DATABAZY email, ktory sa zhoduje s emailom ktory sme zadali do formulara */

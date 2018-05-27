@@ -1,6 +1,7 @@
 <?php
 	function db_connect() {
 		 include dirname(__FILE__).'/../config/database.php';
+
 		 
 		$link = mysqli_connect( $database['host'], $database['user'], $database['pass'], $database['name'], $database['port']); 
 		
