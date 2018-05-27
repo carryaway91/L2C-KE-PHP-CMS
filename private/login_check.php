@@ -1,23 +1,35 @@
 <?php
-    include dirname(__FILE__).'/../framework/helpers.php';
 
-    if( !empty($_POST)) {
-        if(  isset($_POST['email']) && isset($_POST['password']) ) { //overujeme ci v databaze sa nachadza polozka email a pass
-            $user = db_single("SELECT * FROM users WHERE email = '".$_POST['email']."'"); // ak ano 
-            if( !empty($user)) {
-                if( $user->password === $_POST['password']) {
-                    echo 'Vase heslo je: '. $user->password;
+//tento skript sa vykona po tom, co uzivatel zada prihlasovacie udaje => porovnavaju sa s udajmi v datavaze
+
+    include dirname(__FILE__).'/../framework/helpers.php'; //nacitam funkcie na vytahovanie dat z databazy pre porovnavanie uzivatela s udajmi z form
+
+    if( !empty($_POST)) { //ak premenna post nie je prazdna tak ... 
+        if(  isset($_POST['email']) && isset($_POST['password']) ) { //ak sme zadali do inputu nas email a heslo
+           
+            $user = db_single("SELECT * FROM users WHERE email = '".$_POST['email']."'"); 
+            /*do premennej user vytiahneme Z DATABAZY email, ktory sa zhoduje s emailom ktory sme zadali do formulara */
+           
+            if( !empty($user->email) && $user->email === $_POST['email']) {
+             //ak v databaze je dany email a zhoduje sa s emailom co zadal pouzivatel...
+
+                if( $user->password === $_POST['password']) { //ak heslo v databaze sa zhoduje s heslom zadanym do inputu...
+                    
+                    session_start(); //zacneme session
+                    $_SESSION['email'] = $_POST['email']; //do premennej session sa pridana hodnota z inputu kde som zadal email
+                    header('Location: index.php');       //a stranka nas presmeruje na index.php             
+           
                 }else {
-                    echo 'Nesuhlasi!';
+                    echo 'Zadali ste nespravne heslo!';
                 }
+           
             } else {
-                echo 'user neexistuje!';
+                echo 'User neexistuje!';
             }
+        
         } else {
             echo 'Email ani heslo nie su zadane!';
         }
-    } else {
-
     }            
     
 

@@ -1,24 +1,31 @@
 
 <?php
  require_once dirname(__FILE__).'/../framework/helpers.php'; 
+ require_once dirname(__FILE__).'/../framework/loggedin.php';
 	
  if(!empty($_POST)) {
 	if(!empty($_POST['action'])){
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$nickname = $_POST['nickname'];
+		$id = $_POST['id'];
+
+
 		switch($_POST['action']) {		
 			case 'insert': 
-				if(!empty($_POST['email']) && $_POST['password'] && $_POST['nickname']) {
-					db_query("INSERT INTO users (email, password, nickname) VALUES ('".$_POST['email']."','".$_POST['password']."','".$_POST['nickname']."')");
+				if(!empty($email) && !empty($password) && !empty($nickname)) {
+					db_query("INSERT INTO users (email, password, nickname) VALUES ('".$email."','".$password."','".$nickname."')");
 				}
 			break;
 			case 'update':
 				if(!empty($_POST['id'])) {
-					if (!empty($_POST['email']) && !empty($_POST['nickname']) ) {
-						db_query("UPDATE users SET email='".$_POST['email']."', nickname='".$_POST['nickname']."' WHERE ID=".$_POST['id']);
+					if (!empty($email) && !empty($nickname) ) {
+						db_query("UPDATE users SET email='".$email."', nickname='".$nickname."' WHERE ID='".$id."')");
 					}
 				}
 			break;
-			case 'delete': if(!empty($_POST['id'])) {
-					db_query("DELETE FROM users WHERE ID='".$_POST['id']."'");
+			case 'delete': if(!empty($id)) {
+					db_query("DELETE FROM users WHERE ID='".$id."'");
 			}
 			break;
 		}
@@ -57,7 +64,7 @@ $users = db_select('SELECT * FROM users');
 
 
         <?php
-        require_once dirname(__FILE__).'/parts/header.php'; ?>
+		require_once dirname(__FILE__).'/parts/header.php';?>
 		<div class="container-fluid">
 
 			<div class="row">

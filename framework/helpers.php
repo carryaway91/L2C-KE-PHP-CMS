@@ -32,8 +32,5 @@
 
 		 return mysqli_fetch_object($result);
 	 }
-
-
-	 
 	 //******pomocne funkcie na komunikaciu s databazou (mysql) */
  ?>

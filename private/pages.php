@@ -1,22 +1,30 @@
-<?php require_once dirname(__FILE__).'/../framework/helpers.php';
-	
+ <?php require_once dirname(__FILE__).'/../framework/helpers.php';
+	  require_once dirname(__FILE__).'/../framework/loggedin.php';
+
 	if(!empty($_POST)) {
 		if(!empty($_POST['action'])) {
+			$title = $_POST['title'];
+			$content = $_POST['content'];
+			$user_id = $_POST['user_id'];
+			$menu_label = $_POST['menu_label'];
+			$id = $_POST['id'];
+
 			switch($_POST['action']) {		
 				case 'insert': 
-					if(!empty($_POST['title']) && $_POST['content'] && $_POST['user_id']) {
-						db_query("INSERT INTO pages (title, content, user_id) VALUES ('".$_POST['title']."','".$_POST['content']."','".$_POST['user_id']."')");
+					if( !empty($_POST['title']) && !empty($_POST['menu_label']) && !empty($_POST['content'])) {
+						db_query("INSERT INTO pages(title, menu_label, content) VALUES ('".$_POST['title']."','".$_POST['menu_label']."','".$_POST['content']."')");
 					}
 				break;
+
 				case 'update':
-					if(!empty($_POST['id'])) {
-						if (!empty($_POST['title']) && !empty($_POST['content']) ) {
-							db_query("UPDATE pages SET title='".$_POST['title']."', content='".$_POST['content']."' WHERE ID=".$_POST['id']);
+					if(!empty($id)) {
+						if (!empty($title) && !empty($content) ) {
+							db_query("UPDATE pages SET title='".$title."', content='".$content."' WHERE ID='".$id."'");
 						}
 					}
 				break;
-				case 'delete': if(!empty($_POST['id'])) {
-						db_query("DELETE FROM pages WHERE ID='".$_POST['id']."'");
+				case 'delete': if(!empty($id)) {
+						db_query("DELETE FROM pages WHERE ID='".$id."'");
 				}
 				break;
 			}
@@ -55,8 +63,6 @@
 
 	<body>
 
-
-
 		<div class="container-fluid">
 
 			<div class="row">
@@ -76,7 +82,7 @@
 									<th>ID</th>
 									<th>title</th>
 									<th>content</th>
-                                    <th>email</th>
+                                    <th>User_ID</th>
                                     <th>menu_label</th>
                                     <th>menu_order</th>
 								</tr>
@@ -91,8 +97,9 @@
                                         echo '<tr>';
                                         echo '<td>'.$page->ID.'</td>';
                                         echo '<td>'.$page->title.'</td>';
-                                        echo '<td>'.$page->content.'</td>';
-                                        echo '<td>'.db_single("SELECT * FROM users WHERE ID=".$page->User_ID)->email.'</td>';
+										echo '<td>'.$page->content.'</td>';
+										echo '<td>'.$page->User_ID.'</td>';
+                                        //echo '<td>'.db_single("SELECT * FROM users WHERE ID=".$page->User_ID)->email.'</td>';
                                         echo '<td>'.$page->menu_label.'</td>';
                                         echo '<td>'.$page->menu_order.'</td>';
                                         echo '</tr>';

@@ -12,8 +12,8 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.php">Dashboard</a></li>
-                <li><a href="users.php">Users</a></li>
-                <li><a href="#">Pages</a></li>
+                <li><a href="user.php">Users</a></li>
+                <li><a href="page.php">Pages</a></li>
             </ul>
         </div>
     </div>
