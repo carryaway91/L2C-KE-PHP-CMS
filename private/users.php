@@ -20,7 +20,7 @@
 			case 'update':
 				if(!empty($_POST['id'])) {
 					if (!empty($email) && !empty($nickname) ) {
-						db_query("UPDATE users SET email='".$email."', nickname='".$nickname."' WHERE ID='".$id."')");
+					db_query("UPDATE users SET email='".$email."', nickname='".$nickname."' WHERE ID=".$id);
 					}
 				}
 			break;
@@ -29,6 +29,7 @@
 			}
 			break;
 		}
+		header('Location: users.php');
 	}
 }
 $users = db_select('SELECT * FROM users');
@@ -88,6 +89,8 @@ $users = db_select('SELECT * FROM users');
 
 									<th>nickname</th>
 
+									<th>Actions</th>
+
 								</tr>
 
 							</thead>
@@ -101,7 +104,8 @@ $users = db_select('SELECT * FROM users');
                                 echo "<td>".$user->ID."</td>";
                                 
                                 echo "<td>".$user->email."</td>";
-                                echo "<td>".$user->nickname."</td>";
+								echo "<td>".$user->nickname."</td>";
+								echo "<td><a href='user.php?id=".$user->ID."'>Update</a></td>";
                                 echo "</tr>";
                             }  
                             

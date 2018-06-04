@@ -12,14 +12,15 @@
 			switch($_POST['action']) {		
 				case 'insert': 
 					if( !empty($_POST['title']) && !empty($_POST['menu_label']) && !empty($_POST['content'])) {
-						db_query("INSERT INTO pages(title, menu_label, content) VALUES ('".$_POST['title']."','".$_POST['menu_label']."','".$_POST['content']."')");
+						db_query("INSERT INTO pages(title, menu_label, content, User_ID) VALUES ('".$_POST['title']."','".$_POST['menu_label']."','".$_POST['content']."','".$_POST['user_id']."')");
 					}
 				break;
 
 				case 'update':
 					if(!empty($id)) {
 						if (!empty($title) && !empty($content) ) {
-							db_query("UPDATE pages SET title='".$title."', content='".$content."' WHERE ID='".$id."'");
+							db_query
+							("UPDATE pages SET title='".$title."', content='".$content."' WHERE ID='".$id."'");
 						}
 					}
 				break;
@@ -28,6 +29,7 @@
 				}
 				break;
 			}
+			header('Location: pages.php');
 		}
 	}
 	$pages = db_select('SELECT * FROM pages');
@@ -62,7 +64,6 @@
 
 
 	<body>
-
 		<div class="container-fluid">
 
 			<div class="row">
@@ -85,6 +86,8 @@
                                     <th>User_ID</th>
                                     <th>menu_label</th>
                                     <th>menu_order</th>
+									<th>Author</th>
+                                    <th>Actions</th>
 								</tr>
 
 							</thead>
@@ -101,7 +104,12 @@
 										echo '<td>'.$page->User_ID.'</td>';
                                         //echo '<td>'.db_single("SELECT * FROM users WHERE ID=".$page->User_ID)->email.'</td>';
                                         echo '<td>'.$page->menu_label.'</td>';
-                                        echo '<td>'.$page->menu_order.'</td>';
+										echo '<td>'.$page->menu_order.'</td>';
+
+										$user = db_single('SELECT * FROM users WHERE ID='.$page->User_ID);
+										echo '<td><a href="user.php?id='.$user->ID.'">'.$user->nickname.'</a></td>';
+										echo '<td><a href="page.php?id='.$page->ID.'">Update</a></td>';
+
                                         echo '</tr>';
                                 }
                                 ?>

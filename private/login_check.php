@@ -16,12 +16,14 @@
                     
                     session_start(); //zacneme session
                     $_SESSION['email'] = $_POST['email']; //do premennej session sa pridana hodnota z inputu kde som zadal email
+                    $_SESSION['id'] = $user->ID;
+                    
                     header('Location: index.php');       //a stranka nas presmeruje na index.php             
            
-                }else {
+                } else {
                     echo 'Zadali ste nespravne heslo!';
                 }
-           
+
             } else {
                 echo 'User neexistuje!';
             }
@@ -33,3 +35,16 @@
     
 
 ?> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

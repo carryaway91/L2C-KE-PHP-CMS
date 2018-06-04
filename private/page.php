@@ -28,7 +28,7 @@ if(!empty($_REQUEST['id'])) {
 						
 						<input type="hidden" name="id" value="<?php if(!empty($page)) { echo $page->ID; } ?>">
 						
-						<input type="hidden" name="user_id" value="<?php if(!empty($page)) { echo $page->User_ID; } ?>">
+						<input type="hidden" name="user_id" value="<?php if(!empty($page)) { echo $page->User_ID; } else { echo $_SESSION['id']; } ?>">
 						
 						<input type="hidden" name="menu_order" value="<?php if(!empty($page)) { echo $page->menu_order; } ?>">
 						

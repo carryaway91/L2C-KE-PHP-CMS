@@ -12,6 +12,8 @@
 
 	function db_query($sql_string) {
 		$link = db_connect();
+		// $result = mysqli_query($link, $sql_string);
+		// return $result !== false ? $result : mysqli_error($link);
 		return mysqli_query($link, $sql_string);
 		// odkazujeme sa na navratovu hodnotu z db_connect funkcie ($link) a potom ju pouzijem ako parameter pre mysqli_query, coho vysledok bude navratovy sql query
 	}
@@ -20,6 +22,7 @@
  		$result = db_query($sql_string);
  		// do resultu sa zapise navratova hodnota z funkcie db_query
  		$data = [];
+ 		
  		while ($object = mysqli_fetch_object($result)) { 
 			$data[] = $object;
  			//array_push($data, $object);

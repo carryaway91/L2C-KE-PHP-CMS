@@ -16,9 +16,7 @@
 	</head>
 
 	<body>
-
 	
-
 	<?php require_once dirname(__FILE__).'/parts/header.php'; ?>
 		<div class="container-fluid">
 			<div class="row">

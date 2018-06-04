@@ -25,6 +25,8 @@ require_once dirname(__FILE__).'/../framework/helpers.php';
     <title>Blog Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet"> 
+
   </head>
 
   <body>
